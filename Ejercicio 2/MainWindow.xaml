@@ -197,7 +197,7 @@
         <!-- Espacio de trabajo -->
         <Border Grid.Row="1" Background="#FAFAFA" Padding="20">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <materialDesign:PackIcon Kind="MicrosoftRibbon" Width="60" Height="60" Foreground="#1976D2" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <materialDesign:PackIcon Kind="InformationOutline" Width="60" Height="60" Foreground="#1976D2" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                 <TextBlock x:Name="lblInfo" Text="Bienvenido al Gestor de Inventario Henri Matisse (Fluent Ribbon)"
                            FontSize="16" Foreground="#555555" HorizontalAlignment="Center"/>
             </StackPanel>

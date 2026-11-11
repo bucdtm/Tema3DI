@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "sroQ5OGPf5M=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Admin\\Desktop\\TEMA 3 DI EJERCICIOS\\Ejercicio 2\\Ejercicio2.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\controlzex\\7.0.3\\controlzex.7.0.3.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\fluent.ribbon\\11.0.2\\fluent.ribbon.11.0.2.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\materialdesigncolors\\5.4.0\\materialdesigncolors.5.4.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\materialdesignthemes\\5.4.0\\materialdesignthemes.5.4.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.142\\microsoft.xaml.behaviors.wpf.1.1.142.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\system.text.json\\8.0.5\\system.text.json.8.0.5.nupkg.sha512"
+  ],
+  "logs": []
+}

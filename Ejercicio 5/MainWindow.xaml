@@ -1,0 +1,284 @@
+﻿<Window x:Class="Ejercicio5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="INVENTARIO MATISSE" Height="680" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#212121"
+        TextElement.Foreground="White"
+        TextElement.FontFamily="{materialDesign:MaterialDesignFont}">
+
+    <Window.Resources>
+        <!-- Estilo para los botones dentro del panel naranja -->
+        <Style x:Key="OrangeSubItemStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="Margin" Value="0,2"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#20FFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Estilo para ítem resaltado con borde (como Gestión Usuarios en el PDF) -->
+        <Style x:Key="OrangeSubItemHighlightedStyle" TargetType="Button" BasedOn="{StaticResource OrangeSubItemStyle}">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#80FFFFFF"/>
+            <Setter Property="Background" Value="#15FFFFFF"/>
+        </Style>
+
+        <!-- Estilo personalizado para los TabItems colocados a la izquierda -->
+        <Style x:Key="LeftVerticalTabItemStyle" TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="border"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="12,14"
+                                Cursor="Hand">
+                            <ContentPresenter ContentSource="Header"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#1E2328"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#15FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/> <!-- Barra superior con título y Bienvenida -->
+            <RowDefinition Height="*"/>   <!-- TabControl con TabStripPlacement="Left" -->
+        </Grid.RowDefinitions>
+
+        <!-- 1. Barra superior -->
+        <Border Grid.Row="0" Background="#263238">
+            <DockPanel LastChildFill="True">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="14,0,0,0">
+                    <materialDesign:PackIcon Kind="Layers" Width="20" Height="20" Foreground="White" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="INVENTARIO MATISSE" FontWeight="SemiBold" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,14,0">
+                    <TextBlock Text="Bienvenido Admin" Foreground="#CCCCCC" FontSize="13" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Width="32" Height="32" Padding="0" Margin="2,0" ToolTip="Configuración">
+                        <materialDesign:PackIcon Kind="Cog" Width="18" Height="18" Foreground="White"/>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- 2. TabControl con TabStripPlacement="Left" según especifica el PDF -->
+        <TabControl Grid.Row="1"
+                    TabStripPlacement="Left"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Padding="0">
+
+            <!-- Pestaña 1: PRÉSTAMOS -->
+            <TabItem Style="{StaticResource LeftVerticalTabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Width="100" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Star" Width="24" Height="24" Foreground="#FFC107" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                        <TextBlock Text="PRÉSTAMOS" FontSize="11" FontWeight="SemiBold" Foreground="#ECEFF1" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Sub-panel naranja -->
+                    <Border Grid.Column="0" Background="#E65100" Padding="14,20">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="4,0,0,20">
+                                <materialDesign:PackIcon Kind="ViewGrid" Width="18" Height="18" Foreground="White" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="DAM MATISSE" FontWeight="Bold" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Entradas" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Salidas" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Búsqueda" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Listado Pendientes" Click="Option_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Contenido derecho -->
+                    <Border Grid.Column="1" Background="#1E1E1E" Padding="30">
+                        <TextBlock x:Name="txtEstado1" Text="Sección de Préstamos" Foreground="#777777" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- Pestaña 2: ADMINISTRACIÓN -->
+            <TabItem Style="{StaticResource LeftVerticalTabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Width="100" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Cog" Width="24" Height="24" Foreground="#90A4AE" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                        <TextBlock Text="ADMINISTRACIÓN" FontSize="11" FontWeight="SemiBold" Foreground="#ECEFF1" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Sub-panel naranja -->
+                    <Border Grid.Column="0" Background="#E65100" Padding="14,20">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="4,0,0,20">
+                                <materialDesign:PackIcon Kind="ViewGrid" Width="18" Height="18" Foreground="White" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="DAM MATISSE" FontWeight="Bold" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <!-- Resaltado con borde según la captura del PDF -->
+                            <Button Style="{StaticResource OrangeSubItemHighlightedStyle}" Content="Gestión Usuarios" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Contraseñas" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Mantenimiento" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Stock" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Listados" Click="Option_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Contenido derecho -->
+                    <Border Grid.Column="1" Background="#1E1E1E" Padding="30">
+                        <TextBlock x:Name="txtEstado2" Text="Sección de Administración" Foreground="#777777" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- Pestaña 3: INVENTARIO -->
+            <TabItem Style="{StaticResource LeftVerticalTabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Width="100" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="CubeOutline" Width="24" Height="24" Foreground="#64B5F6" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                        <TextBlock Text="INVENTARIO" FontSize="11" FontWeight="SemiBold" Foreground="#ECEFF1" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Sub-panel naranja -->
+                    <Border Grid.Column="0" Background="#E65100" Padding="14,20">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="4,0,0,20">
+                                <materialDesign:PackIcon Kind="ViewGrid" Width="18" Height="18" Foreground="White" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="DAM MATISSE" FontWeight="Bold" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Listado Espacios" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Chequear" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Inventario nuevo" Click="Option_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Contenido derecho -->
+                    <Border Grid.Column="1" Background="#1E1E1E" Padding="30">
+                        <TextBlock x:Name="txtEstado3" Text="Sección de Inventario" Foreground="#777777" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- Pestaña 4: ARTÍCULOS -->
+            <TabItem Style="{StaticResource LeftVerticalTabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Width="100" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="CardOutline" Width="24" Height="24" Foreground="#81C784" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                        <TextBlock Text="ARTÍCULOS" FontSize="11" FontWeight="SemiBold" Foreground="#ECEFF1" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Sub-panel naranja -->
+                    <Border Grid.Column="0" Background="#E65100" Padding="14,20">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="4,0,0,20">
+                                <materialDesign:PackIcon Kind="ViewGrid" Width="18" Height="18" Foreground="White" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="DAM MATISSE" FontWeight="Bold" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Articulos" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Modelo Articulo" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Tipo Articulo" Click="Option_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Contenido derecho -->
+                    <Border Grid.Column="1" Background="#1E1E1E" Padding="30">
+                        <TextBlock x:Name="txtEstado4" Text="Sección de Artículos" Foreground="#777777" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- Pestaña 5: INFORMACIÓN -->
+            <TabItem Style="{StaticResource LeftVerticalTabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Width="100" HorizontalAlignment="Center">
+                        <materialDesign:PackIcon Kind="ChartBar" Width="24" Height="24" Foreground="#4DD0E1" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                        <TextBlock Text="INFORMACIÓN" FontSize="11" FontWeight="SemiBold" Foreground="#ECEFF1" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Sub-panel naranja -->
+                    <Border Grid.Column="0" Background="#E65100" Padding="14,20">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="4,0,0,20">
+                                <materialDesign:PackIcon Kind="ViewGrid" Width="18" Height="18" Foreground="White" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="DAM MATISSE" FontWeight="Bold" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Informes" Click="Option_Click"/>
+                            <Button Style="{StaticResource OrangeSubItemStyle}" Content="Charts" Click="Option_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Contenido derecho -->
+                    <Border Grid.Column="1" Background="#1E1E1E" Padding="30">
+                        <TextBlock x:Name="txtEstado5" Text="Sección de Información" Foreground="#777777" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

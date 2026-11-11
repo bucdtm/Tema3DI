@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "H54VoIDGwRI=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Admin\\Desktop\\TEMA 3 DI EJERCICIOS\\Ejercicio 5\\Ejercicio5.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\materialdesigncolors\\5.4.0\\materialdesigncolors.5.4.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\materialdesignthemes\\5.4.0\\materialdesignthemes.5.4.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.142\\microsoft.xaml.behaviors.wpf.1.1.142.nupkg.sha512"
+  ],
+  "logs": []
+}

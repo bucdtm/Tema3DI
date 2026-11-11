@@ -1,0 +1,259 @@
+﻿<Window x:Class="Ejercicio1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="INVENTARIO MATISSE" Height="650" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#252526"
+        TextElement.Foreground="White"
+        TextElement.FontFamily="{materialDesign:MaterialDesignFont}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Barra de título personalizada -->
+            <RowDefinition Height="Auto"/> <!-- Menú principal -->
+            <RowDefinition Height="Auto"/> <!-- Barra de herramientas -->
+            <RowDefinition Height="*"/>    <!-- Área de trabajo -->
+        </Grid.RowDefinitions>
+
+        <!-- Barra superior azul (Título e icono Matisse) -->
+        <Border Grid.Row="0" Background="#0067B8" Height="36">
+            <DockPanel LastChildFill="True">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <materialDesign:PackIcon Kind="Layers" Width="20" Height="20" Foreground="White" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="INVENTARIO MATISSE" FontWeight="SemiBold" FontSize="13" Foreground="White" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Width="30" Height="30" Padding="0" Margin="2,0" ToolTip="Usuario Admin">
+                        <materialDesign:PackIcon Kind="AccountOutline" Width="18" Height="18" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Width="30" Height="30" Padding="0" Margin="2,0" ToolTip="Minimizar" Click="BtnMinimizar_Click">
+                        <materialDesign:PackIcon Kind="Minus" Width="18" Height="18" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Width="30" Height="30" Padding="0" Margin="2,0" ToolTip="Maximizar" Click="BtnMaximizar_Click">
+                        <materialDesign:PackIcon Kind="WindowMaximize" Width="18" Height="18" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Width="30" Height="30" Padding="0" Margin="2,0" ToolTip="Cerrar" Click="BtnSalir_Click">
+                        <materialDesign:PackIcon Kind="Close" Width="18" Height="18" Foreground="White"/>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- Menú principal -->
+        <Menu Grid.Row="1" Background="#1E1E1E" Foreground="White" FontSize="14" Padding="5,2">
+            <!-- 1. Menú Prestamos -->
+            <MenuItem Header="Prestamos" Foreground="White" Padding="10,6">
+                <MenuItem Header="Salidas" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="Logout" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Entradas" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="Login" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator Background="#444444"/>
+                <MenuItem Header="Listado Pendientes" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="ClipboardTextOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+
+            <!-- 2. Menú Artículos -->
+            <MenuItem Header="Artículos" Foreground="White" Padding="10,6">
+                <MenuItem Header="Articulo Nuevo" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="NotePlusOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Editar" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="Pencil" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Lista" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="FormatListBulleted" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator Background="#444444"/>
+                <MenuItem Header="Modelo Articulo Nuevo" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="PlusBoxOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Modelo Articulo Editar" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="SquareEditOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Lista Modelo Articulo" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="FormatListBulleted" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+
+            <!-- 3. Menú Administración -->
+            <MenuItem Header="Administración" Foreground="White" Padding="10,6">
+                <MenuItem Header="Gestión Usuarios">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="AccountMultipleOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                    <MenuItem Header="Nuevo" Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="AccountPlusOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Editar" Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="AccountEditOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Lista" Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="FormatListBulleted" Width="18" Height="18" VerticalAlignment="Center"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Contraseñas" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="KeyVariant" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Mantenimiento">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="WrenchOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                    <MenuItem Header="Eliminar Articulo" Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="DeleteOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Eliminar Modelo Articulo" Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="DeleteSweepOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Eliminar Usuario" Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="AccountRemoveOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <Separator Background="#444444"/>
+                <MenuItem Header="Stock" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="Warehouse" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Listado Usuarios" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="AccountGroupOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+
+            <!-- 4. Menú Inventario -->
+            <MenuItem Header="Inventario" Foreground="White" Padding="10,6">
+                <MenuItem Header="Listado de espacios" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="HomeOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Chequear Inventario" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="ClipboardCheckOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Inventario Nuevo" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="PlaylistPlus" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+
+            <!-- 5. Menú Información -->
+            <MenuItem Header="Información" Foreground="White" Padding="10,6">
+                <MenuItem Header="Informes" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="FileChartOutline" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Gráficos" Click="MenuItem_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="ChartBar" Width="18" Height="18" VerticalAlignment="Center"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <!-- Barra de herramientas (ToolBar) -->
+        <ToolBarTray Grid.Row="2" Background="#1E1E1E">
+            <ToolBar Background="#1E1E1E" ToolBarTray.IsLocked="True" Padding="4">
+                <!-- Botón Salir con Shutdown() -->
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        Padding="4" Margin="2"
+                        ToolTip="Salir del programa (Application.Current.Shutdown)"
+                        Click="BtnSalir_Click">
+                    <materialDesign:PackIcon Kind="ArrowLeftCircleOutline" Width="26" Height="26" Foreground="#90CAF9"/>
+                </Button>
+
+                <!-- Botón Entradas / Siguiente -->
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        Padding="4" Margin="2"
+                        ToolTip="Registrar entradas"
+                        Click="BtnEntradas_Click">
+                    <materialDesign:PackIcon Kind="ArrowRightCircleOutline" Width="26" Height="26" Foreground="#42A5F5"/>
+                </Button>
+
+                <!-- Botón Base de datos / Guardar -->
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        Padding="4" Margin="2"
+                        ToolTip="Guardar o consultar base de datos de inventario"
+                        Click="BtnGuardar_Click">
+                    <materialDesign:PackIcon Kind="DatabaseOutline" Width="26" Height="26" Foreground="#42A5F5"/>
+                </Button>
+
+                <!-- Botón Listados / Columnas -->
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        Padding="4" Margin="2"
+                        ToolTip="Visualizar listado general en tabla"
+                        Click="BtnListados_Click">
+                    <materialDesign:PackIcon Kind="ViewHeadline" Width="26" Height="26" Foreground="#90CAF9"/>
+                </Button>
+
+                <Separator Background="#555555" Margin="8,4"/>
+
+                <!-- Etiqueta y campo de búsqueda -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0">
+                    <TextBlock Text="Busca un artículo" Foreground="#CCCCCC" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="13"/>
+                    <TextBox x:Name="txtBusqueda"
+                             Width="200" Height="28"
+                             Foreground="White"
+                             Background="#141414"
+                             BorderBrush="#777777"
+                             BorderThickness="1"
+                             Padding="6,3"
+                             VerticalContentAlignment="Center"
+                             ToolTip="Introduzca el nombre o código del artículo a buscar"/>
+                </StackPanel>
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- Área de contenido principal -->
+        <Border Grid.Row="3" Background="#1E1E1E" Padding="20">
+            <TextBlock x:Name="lblEstado"
+                       Text="Sistema de Gestión de Inventario Henri Matisse"
+                       Foreground="#757575"
+                       FontSize="18"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Border>
+    </Grid>
+</Window>

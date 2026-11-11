@@ -1,0 +1,212 @@
+﻿<Fluent:RibbonWindow x:Class="Ejercicio2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Fluent="urn:fluent-ribbon"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="INVENTARIO MATISSE" Height="550" Width="950"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Control Ribbon de Fluent -->
+        <Fluent:Ribbon Grid.Row="0">
+            <!-- Menú de aplicación Archivo -->
+            <Fluent:Ribbon.Menu>
+                <Fluent:Backstage Header="Archivo">
+                    <Fluent:BackstageTabControl>
+                        <Fluent:BackstageTabItem Header="Información">
+                            <StackPanel Margin="20">
+                                <TextBlock Text="Inventario Matisse" FontSize="20" FontWeight="Bold"/>
+                                <TextBlock Text="Gestión integral de artículos y préstamos" Margin="0,10,0,0"/>
+                            </StackPanel>
+                        </Fluent:BackstageTabItem>
+                        <Fluent:Button Header="Salir" Click="BtnSalir_Click"/>
+                    </Fluent:BackstageTabControl>
+                </Fluent:Backstage>
+            </Fluent:Ribbon.Menu>
+
+            <!-- Pestaña 1: PRESTAMOS -->
+            <Fluent:RibbonTabItem Header="PRESTAMOS">
+                <Fluent:RibbonGroupBox Header="Operaciones">
+                    <Fluent:Button Header="Salida" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="ArrowRightBoldCircle" Width="32" Height="32" Foreground="#2E7D32"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Devolución" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="ArrowLeftBoldCircle" Width="32" Height="32" Foreground="#1976D2"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Búsquedas">
+                    <StackPanel VerticalAlignment="Center" Margin="5">
+                        <TextBlock Text="Por número de serie" Margin="0,0,0,5" Foreground="#555555" FontSize="11"/>
+                        <TextBox Width="140" Height="24" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Listados">
+                    <Fluent:Button Header="Pendientes" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="SwapHorizontalBold" Width="32" Height="32" Foreground="#E65100"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <!-- Pestaña 2: ARTÍCULOS -->
+            <Fluent:RibbonTabItem Header="ARTÍCULOS">
+                <Fluent:RibbonGroupBox Header="Artículos">
+                    <Fluent:Button Header="Nuevo" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="FilePlusOutline" Width="32" Height="32" Foreground="#0288D1"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Editar" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="SquareEditOutline" Width="32" Height="32" Foreground="#388E3C"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Listado" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="FormatListBulleted" Width="32" Height="32" Foreground="#512DA8"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Modelo Artículo">
+                    <Fluent:Button Header="Nuevo" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="AlphaMCircleOutline" Width="32" Height="32" Foreground="#D32F2F"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Editar" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="Pencil" Width="32" Height="32" Foreground="#FFA000"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Listado" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="FileSearchOutline" Width="32" Height="32" Foreground="#0097A7"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <!-- Pestaña 3: ADMINISTRACIÓN -->
+            <Fluent:RibbonTabItem Header="ADMINISTRACIÓN">
+                <Fluent:RibbonGroupBox Header="Gestión Usuarios">
+                    <Fluent:Button Header="Nuevo" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="AccountPlus" Width="32" Height="32" Foreground="#0288D1"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Editar" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="AccountEdit" Width="32" Height="32" Foreground="#43A047"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Contraseñas" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="FormTextboxPassword" Width="32" Height="32" Foreground="#E53935"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Listado" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="AccountMultipleOutline" Width="32" Height="32" Foreground="#5E35B1"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Mantenimiento">
+                    <Fluent:Button Header="Artículo" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="DeleteForever" Width="32" Height="32" Foreground="#C62828"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Modelo" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="DeleteOutline" Width="32" Height="32" Foreground="#D32F2F"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Usuario" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="AccountRemove" Width="32" Height="32" Foreground="#EF6C00"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="STOCK">
+                    <Fluent:Button Header="Stock" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="Warehouse" Width="32" Height="32" Foreground="#00897B"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <!-- Pestaña 4: INVENTARIO -->
+            <Fluent:RibbonTabItem Header="INVENTARIO">
+                <Fluent:RibbonGroupBox Header="Espacios">
+                    <Fluent:Button Header="Espacios" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="StorefrontOutline" Width="32" Height="32" Foreground="#3949AB"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Chequeo" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="CheckDecagramOutline" Width="32" Height="32" Foreground="#2E7D32"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Header="Inventario" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="CubeOutline" Width="32" Height="32" Foreground="#0288D1"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <!-- Pestaña 5: INFORMACIÓN -->
+            <Fluent:RibbonTabItem Header="INFORMACIÓN">
+                <Fluent:RibbonGroupBox Header="Informes">
+                    <Fluent:Button Header="Informe" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="FileChartOutline" Width="32" Height="32" Foreground="#2E7D32"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Gráficos">
+                    <Fluent:Button Header="Charts" Size="Large" Click="RibbonButton_Click">
+                        <Fluent:Button.LargeIcon>
+                            <materialDesign:PackIcon Kind="ChartBar" Width="32" Height="32" Foreground="#00ACC1"/>
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+        </Fluent:Ribbon>
+
+        <!-- Espacio de trabajo -->
+        <Border Grid.Row="1" Background="#FAFAFA" Padding="20">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="MicrosoftRibbon" Width="60" Height="60" Foreground="#1976D2" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock x:Name="lblInfo" Text="Bienvenido al Gestor de Inventario Henri Matisse (Fluent Ribbon)"
+                           FontSize="16" Foreground="#555555" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Barra de estado -->
+        <Fluent:StatusBar Grid.Row="2">
+            <Fluent:StatusBarItem Value="Listo" HorizontalAlignment="Left"/>
+            <Fluent:StatusBarItem Value="Visual Studio 2022 - Fluent.Ribbon" HorizontalAlignment="Right"/>
+        </Fluent:StatusBar>
+    </Grid>
+</Fluent:RibbonWindow>

@@ -1,0 +1,234 @@
+﻿<Window x:Class="Ejercicio3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="INVENTARIO MATISSE" Height="680" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#181818"
+        TextElement.Foreground="White"
+        TextElement.FontFamily="{materialDesign:MaterialDesignFont}">
+
+    <Window.Resources>
+        <!-- Estilo para los botones dentro de los Expanders -->
+        <Style x:Key="SubItemButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Foreground" Value="#CCCCCC"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="28,8,10,8"/>
+            <Setter Property="Height" Value="34"/>
+        </Style>
+
+        <!-- Estilo para los encabezados de Expander -->
+        <Style x:Key="SidebarExpanderStyle" TargetType="Expander" BasedOn="{StaticResource MaterialDesignExpander}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,2"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/> <!-- Barra superior roja -->
+            <RowDefinition Height="*"/>   <!-- Cuerpo: Sidebar + Contenido -->
+        </Grid.RowDefinitions>
+
+        <!-- 1. Barra de la ventana superior (Roja con Popup) -->
+        <Border Grid.Row="0" Background="#C62828">
+            <DockPanel LastChildFill="True">
+                <!-- Logotipo y título -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0,0,0">
+                    <materialDesign:PackIcon Kind="ViewGrid" Width="20" Height="20" Foreground="White" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="INVENTARIO MATISSE" FontWeight="SemiBold" FontSize="14" Foreground="White" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Botones de la ventana y control PopUp -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
+                    <!-- Botón de los 3 puntos (Kebab Menu) que dispara el PopUp -->
+                    <ToggleButton x:Name="btnMore"
+                                  Style="{StaticResource MaterialDesignFlatButton}"
+                                  Width="34" Height="34" Padding="0" Margin="2,0"
+                                  ToolTip="Opciones de usuario">
+                        <materialDesign:PackIcon Kind="DotsVertical" Width="22" Height="22" Foreground="White"/>
+                    </ToggleButton>
+
+                    <!-- Control PopUp requerido en el ejercicio -->
+                    <Popup x:Name="popupMenu"
+                           IsOpen="{Binding IsChecked, ElementName=btnMore}"
+                           PlacementTarget="{Binding ElementName=btnMore}"
+                           Placement="Bottom"
+                           StaysOpen="False"
+                           AllowsTransparency="True"
+                           PopupAnimation="Fade">
+                        <Border Background="#2C2C2C" CornerRadius="4" BorderBrush="#4A4A4A" BorderThickness="1"
+                                Padding="4,8" Width="170" Margin="0,5,5,5">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="12" ShadowDepth="4" Direction="315" Opacity="0.6"/>
+                            </Border.Effect>
+                            <StackPanel>
+                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        HorizontalContentAlignment="Left" Padding="12,8" Height="36"
+                                        Click="PopupItem_Click" Tag="Ajustes">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="WrenchOutline" Width="18" Height="18" Foreground="White" Margin="0,0,12,0"/>
+                                        <TextBlock Text="Ajustes" Foreground="White" FontSize="13"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        HorizontalContentAlignment="Left" Padding="12,8" Height="36"
+                                        Click="PopupItem_Click" Tag="Cuenta">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="AccountOutline" Width="18" Height="18" Foreground="White" Margin="0,0,12,0"/>
+                                        <TextBlock Text="Cuenta" Foreground="White" FontSize="13"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        HorizontalContentAlignment="Left" Padding="12,8" Height="36"
+                                        Click="PopupItem_Click" Tag="Ayuda">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="HelpCircleOutline" Width="18" Height="18" Foreground="White" Margin="0,0,12,0"/>
+                                        <TextBlock Text="Ayuda" Foreground="White" FontSize="13"/>
+                                    </StackPanel>
+                                </Button>
+                                <Separator Background="#444444" Margin="6,4"/>
+                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        HorizontalContentAlignment="Left" Padding="12,8" Height="36"
+                                        Click="BtnDesconectar_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Power" Width="18" Height="18" Foreground="White" Margin="0,0,12,0"/>
+                                        <TextBlock Text="Desconectar" Foreground="White" FontSize="13"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+
+                    <!-- Botones estándar de ventana -->
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Width="34" Height="34" Padding="0" Click="BtnMinimizar_Click">
+                        <materialDesign:PackIcon Kind="Minus" Width="18" Height="18" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Width="34" Height="34" Padding="0" Click="BtnMaximizar_Click">
+                        <materialDesign:PackIcon Kind="WindowMaximize" Width="18" Height="18" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Width="34" Height="34" Padding="0" Click="BtnCerrar_Click">
+                        <materialDesign:PackIcon Kind="Close" Width="18" Height="18" Foreground="White"/>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- 2. Cuerpo: Barra lateral con Expanders + Panel de contenido -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230"/> <!-- Sidebar -->
+                <ColumnDefinition Width="*"/>   <!-- Contenido principal -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Barra lateral oscura -->
+            <Border Grid.Column="0" Background="#212121">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="0,10,0,10">
+                        <!-- Cabecera de grupo: DAM MATISSE -->
+                        <Border Padding="16,10,10,14">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ViewGrid" Width="20" Height="20" Foreground="White" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="DAM MATISSE" FontWeight="Bold" FontSize="14" Foreground="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Expander 1: Préstamos -->
+                        <Expander Style="{StaticResource SidebarExpanderStyle}">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="BookOutline" Width="18" Height="18" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Préstamos" FontSize="13" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel Background="#1A1A1A">
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Salidas" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Entradas" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Busqueda" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Listado pendientes" Click="SubItem_Click"/>
+                            </StackPanel>
+                        </Expander>
+
+                        <!-- Expander 2: Artículos -->
+                        <Expander Style="{StaticResource SidebarExpanderStyle}">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="CheckboxBlankOutline" Width="18" Height="18" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Artículos" FontSize="13" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel Background="#1A1A1A">
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Articulos" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Modelo Articulo" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Tipo de Articulos" Click="SubItem_Click"/>
+                            </StackPanel>
+                        </Expander>
+
+                        <!-- Expander 3: Administración -->
+                        <Expander Style="{StaticResource SidebarExpanderStyle}">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="CogOutline" Width="18" Height="18" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Administración" FontSize="13" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel Background="#1A1A1A">
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Gestión Usuarios" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Contraseñas" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Mantenimiento" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Stock" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Listados" Click="SubItem_Click"/>
+                            </StackPanel>
+                        </Expander>
+
+                        <!-- Expander 4: Inventario -->
+                        <Expander Style="{StaticResource SidebarExpanderStyle}">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ClipboardTextOutline" Width="18" Height="18" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Inventario" FontSize="13" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel Background="#1A1A1A">
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Listado de Espacios" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Chequear Inventario" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Inventario Nuevo" Click="SubItem_Click"/>
+                            </StackPanel>
+                        </Expander>
+
+                        <!-- Expander 5: Información -->
+                        <Expander Style="{StaticResource SidebarExpanderStyle}">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="InformationOutline" Width="18" Height="18" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Información" FontSize="13" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel Background="#1A1A1A">
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Informes" Click="SubItem_Click"/>
+                                <Button Style="{StaticResource SubItemButtonStyle}" Content="Gráficos" Click="SubItem_Click"/>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- Área principal de trabajo -->
+            <Border Grid.Column="1" Background="#181818" Padding="30">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="FolderOutline" Width="64" Height="64" Foreground="#444444" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+                    <TextBlock x:Name="txtContenido"
+                               Text="Selecciona una opción del menú lateral expandible"
+                               Foreground="#888888" FontSize="16" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
